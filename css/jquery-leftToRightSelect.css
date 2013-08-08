@@ -1,0 +1,71 @@
+.tunaBox {
+    float: left;
+    width: 336px;
+    margin-right: 20px;
+}
+.tunaBoxHeader {
+    color: #a00000;
+    font: 13px Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    padding-left: 4px;
+    padding-bottom: 3px;
+}
+.tunaLeftBox {
+}
+.tunaRightBox {
+}
+.tunaSelectBox {
+    border: 1px solid #bababa;
+    height: 200px;
+    overflow-y: scroll;
+}    
+.tunaSelectBox table {
+    width: 319px;
+    height:    24px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px solid #ffffff;
+}
+.tunaLeftBox table tbody tr {
+}
+.tunaLeftBox table tbody tr td {
+    width: 327px;
+    height: 19px;
+    color: #505050;
+    font: 12px Arial,Helvetica,sans-serif;
+    padding-top: 3px;
+    padding-left: 3px;
+    cursor: pointer;
+    border-bottom: 1px solid #bababa;
+}
+#tunaValuesSelected {
+}
+td.tunaRightLabel {
+    width: 250px;
+    height: 20px;
+    color: #505050;
+    font: 12px Arial,Helvetica,sans-serif;
+    padding-top: 3px;
+    padding-left: 3px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+}
+td.tunaRightDelete {
+    width: 18px;
+    height: 23px;
+    border-bottom: 2px solid #ffffff;
+    background-image: url(../../../images/icon-Remove/1.0/icon-Remove-1.0.gif);
+    background-repeat:no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+table.tunaRightSelectRowOdd {
+    background-color: #f0f0f0;
+}
+table.tunaRightSelectRowEven {
+    background-color: #e0e0e0;
+}
+a.buttonLabel {
+    margin-left: 3px;
+    color: #0083BF;
+}
