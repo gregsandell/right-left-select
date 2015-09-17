@@ -35,6 +35,14 @@
             return;
         }
         $(this).data("tunaSelect", { 
+            
+            /* Define the methods that will be public.  They're actually private here, but exposed as
+                public below.
+            */
+            
+            /*
+                Add all the model data for the left container that is attached to selectContainerLeft
+            */
             addAll: function() {
                 var model = $(selectContainerLeft).data("model");
                 $.each(model, function(i, record) {
@@ -45,6 +53,10 @@
                 });
                 paint();
             },
+            
+            /*
+                Unmark all the items that are selected in the left container.
+            */
             removeAll: function() {
                 var model = $(selectContainerLeft).data("model");
                 $.each(model, function(i, record) {
@@ -54,6 +66,10 @@
                 });
                 paint();
             },
+            
+            /*
+                Return the model (JSON) representing the selected state.
+            */
             getResult: function() {
                 var model = $(selectContainerLeft).data("model");
                 var result = new Array();
@@ -69,6 +85,11 @@
                 });
                 return result;
             },        
+            
+            /*
+                Handler for the 'clear' link that will clear out the search field, causing all left container
+                items to be visible.
+            */
             clearSearch: function() {
                 if (!optionElementExists('searchField')) return;
                 var model = $(selectContainerLeft).data("model");
@@ -80,6 +101,11 @@
                 });
                 paint();
             },
+            
+            /*
+                Allows user to replace the originally specified model data with new data.  Or, if the
+                model data was not supplied in HTML5 data attributes, add the data now.
+            */
             loadNewData: function(newFieldNames, jsonData) {
                 var model = new Array();
                 var idx = 0;
@@ -93,6 +119,11 @@
                 paint();
             }
         });
+        
+        /* 
+            Manage the time pause before a keystroke in the Search field causes a model change
+            and repaint.
+        */
         if (optionElementExists('searchField')) {
             var timer = false;
             $(options.searchField).keydown(function() {
@@ -117,7 +148,12 @@
                 });
             });
         }
+        
         init();
+        
+        /*
+            Assemble the HTML of the widget itself.
+        */
         function init() {
             var model = new Array();
             selectContainerLeft = $("<div>").addClass("tunaBox tunaBoxHeader").text("Select one or more value(s)");
@@ -151,6 +187,10 @@
             $(selectContainerLeft).data("model", model);
             paint();
         }
+        
+        /*
+            Draw/redraw the contents of the HTML widget.
+        */
         function paint() {
             $(userContainer).find('.tunaLeftBox table').remove();
             $(userContainer).find('.tunaRightBox table').remove();
@@ -226,34 +266,42 @@
             return options && typeof options[property] != 'undefined';
         }
     }
+    
+    /* Define delegates for the methods that will be publically exposed. */
+    
     /* Externally exposed method which delegates to the same-named internal method. */
     function addAll(tunaSelect) {
         $(this).click(function() {
             tunaSelect.addAll();
         });
     }
+    
     /* Externally exposed method which delegates to the same-named internal method. */
     function removeAll(tunaSelect) {
         $(this).click(function() {
             tunaSelect.removeAll();
         });
     }
+    
     /* Externally exposed method which delegates to the same-named internal method. */
     function getResult(tunaSelect) {
         $(this).click(function() {
             tunaSelect.getResult();
         });
     }
+    
     function clearSearch(tunaSelect) {
         $(this).click(function() {
             tunaSelect.clearSearch();
         });
     }
+    
     function loadNewData(tunaSelect, newFieldNames, jsonData) {
         $(this).click(function() {
             tunaSelect.loadNewData(newFieldNames, jsonData);
         });
     }
+    
     var exposedMethods = {
         addAll: addAll,
         removeAll: removeAll,
@@ -264,6 +312,7 @@
 
     $.fn.tunaSelect = function(method) {
         if(exposedMethods[method]) {
+                /* Expose the public methods */
                 return exposedMethods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         } else {
                 return tunaSelect.apply(this, arguments);
